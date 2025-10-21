@@ -6,9 +6,9 @@ import scipy.stats as stats              #for linear regression
 from sklearn import linear_model, metrics          
 # form sklearn.metrics import r2_score        #for R squared calculation   this is the error for the future will be solved[ fix it later
 from sklearn.preprocessing import StandardScaler  #for scale standardization
-
 from sklearn import tree
 from sklearn.tree import DecisionTreeClassifier
+from scipy.cluster.hierarchy import dendrogram, linkage
 
 def mean_median():
     student_grade=np.array([np.random.randint(50, 101) for _ in range(100)])
@@ -169,9 +169,31 @@ def confusion_matrix():
     actual_value=np.random.binomial(1, 0.9, 100)
     predict_value=np.random.binomial(1, 0.9, 100)
 
-    confusion_matrix=metrics.confusion_matrix(actual_value, predict_value)
-    confusion_matrix_display=metrics.ConfusionMatrixDisplay(confusion_matrix=confusion_matrix, display_labels=[0, 1])
-    confusion_matrix_display.plot()
-    plt.show()
+    # confusion_matrix=metrics.confusion_matrix(actual_value, predict_value)   #Create comfusion Tree
+    # confusion_matrix_display=metrics.ConfusionMatrixDisplay(confusion_matrix=confusion_matrix, display_labels=[0, 1])  #disply confusion tree
+    # confusion_matrix_display.plot()
+    # Accuracy_measure=metrics.accuracy_score(actual_value, predict_value)   #(PT+NT)/total prediction
+    # print(f"My model accuracy is: {Accuracy_measure}")
+
+    # precision_measure=metrics.precision_score(actual_value, predict_value)   #TP/(TP+FP)
+    # print(f"My model precision is: {precision_measure}")
+
+    # specificity_measure=metrics.recall_score(actual_value, predict_value, pos_label=0)
+    # print(f"MY model Specificity is: {specificity_measure}")
+
+    f_score_measure=metrics.f1_score(actual_value , predict_value)
+    print(f"My model F-Score Accuracy is: {f_score_measure}")
+    # plt.show()
 # confusion_matrix()
 
+def Clustering_algorithm():
+    x = [4, 5, 10, 4, 3, 11, 14 , 6, 10, 12]
+    y = [21, 19, 24, 17, 16, 25, 24, 22, 21, 21]
+
+    # plt.scatter(x , y)
+    my_data=list(zip(x, y))
+    my_linkage_data=linkage(my_data, method='ward', metric='euclidean')
+    dendrogram(my_linkage_data)
+    plt.show()
+
+# Clustering_algorithm()
