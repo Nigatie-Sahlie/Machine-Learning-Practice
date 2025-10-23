@@ -197,3 +197,30 @@ def Clustering_algorithm():
     plt.show()
 
 # Clustering_algorithm()
+
+def logical_regression():
+    X = np.array([3.78, 2.44, 2.09, 0.14, 1.72, 1.65, 4.92, 4.37, 4.96, 4.52, 3.69, 5.88]).reshape(-1,1)
+    y = np.array([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1])
+
+    print("**********Welcome to Logistic Regression*****************")
+    for i in range(5):  #Five time looping 
+        print("Enter '-1' for exit from the system.")   #Option to continue or exit from the loop
+        inpute_from_you=float(input("Enter your Positive Floating Number ? "))   #float number expected from the user
+        if inpute_from_you == -1:
+            break
+        # else:    #Optional using eles
+        my_Logistic_regression_model=linear_model.LogisticRegression().fit(X, y)   #To logistic regression model object
+        my_predision_regresion=my_Logistic_regression_model.predict(np.array(inpute_from_you).reshape(-1,1))
+        # print(f"the predicted value for {inpute_from_you} is: {my_predision_regresion}")
+
+        # exipected_coefficient=np.exp(my_Logistic_regression_model.coef_)    #Find the coefficient of my model
+        # print(f"my Model Coeffient is: {exipected_coefficient}")
+
+        def probablity_fun(model, x_value):
+            log_odd=model.coef_ * x_value + model.intercept_
+            odds=np.exp(log_odd)
+            my_probablity=(odds/(1+odds))*100
+            return my_probablity
+        print(f"{probablity_fun(my_Logistic_regression_model, inpute_from_you)}% is the probablity for {inpute_from_you}")
+logical_regression()
+
